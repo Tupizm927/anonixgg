@@ -1,0 +1,12 @@
+2026-02-17 03:18:31 - INFO - Загружены администраторы: {884616336, 7812264465, 6422288275, 6793836948, 5577571227, 8410571675, 6835822112, 6748476592, 8528056498, 1602527925, 7207952825, 7600891201, 7612913234, 1535322840, 7943221337, 7556127960, 7721881567, 6319110116, 5930947941, 6134093170, 426567413, 7388690934, 8135719165}
+2026-02-17 03:18:31 - INFO - База данных инициализирована и данные загружены.
+2026-02-17 03:18:31 - ERROR - Ошибка в main: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
+Traceback (most recent call last):
+  File "C:\Users\08112021\Desktop\Новая папка\bot.py", line 1186, in main
+    application = Application.builder().token(BOT_TOKEN).build()
+  File "C:\Users\08112021\AppData\Local\Programs\Python\Python314\Lib\site-packages\telegram\ext\_applicationbuilder.py", line 312, in build
+    updater = Updater(bot=bot, update_queue=update_queue)
+  File "C:\Users\08112021\AppData\Local\Programs\Python\Python314\Lib\site-packages\telegram\ext\_updater.py", line 128, in __init__
+    self.__polling_cleanup_cb: Optional[Callable[[], Coroutine[Any, Any, None]]] = None
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Updater' object has no attribute '_Updater__polling_cleanup_cb' and no __dict__ for setting new attributes
