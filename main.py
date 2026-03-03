@@ -19,7 +19,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-BOT_TOKEN = "8763102502:AAGNtg0N967Ljv62Y8SnWpbvdBbUf-Iau1w"
+BOT_TOKEN = "8603175352:AAGepcycAWg9BupsakENjjpt2bzvbnsRn50"
 SUPER_ADMIN_IDS = {8528056498, 426567413, 6134093170}
 VALUTE = "TON"
 TON_ADDRESS = "UQCZXfNOcmHf-4W86Tt6wnvzQ8Kij81aZnsK000YT398VRp1"
@@ -1203,3 +1203,4 @@ def main():
 if __name__ == '__main__':
 
     main()
+
