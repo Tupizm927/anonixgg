@@ -422,90 +422,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             return
 
-    async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-
-        query = update.callback_query
-
-        await query.answer()
-
-        data = query.data
-
-        # 🔙 Возврат в меню
-
-        if data == "menu":
-
-            keyboard = [
-
-                [InlineKeyboardButton("📊 Статистика", callback_data="more_info")],
-
-            ]
-
-            await query.edit_message_text(
-
-                "🏠 <b>Главное меню</b>",
-
-                reply_markup=InlineKeyboardMarkup(keyboard),
-
-                parse_mode="HTML"
-
-            )
-
-
-        # 📊 Статистика
-
-        elif data == "more_info":
-
-            text = (
-
-                "📊 <b>Статистика Lolz Market</b>\n\n"
-
-                "🤝 Всего сделок: 111610\n"
-
-                "✅ Успешных сделок: 108206\n"
-
-                "💰 Общий объем: $1151492\n"
-
-                "⭐️ Средний рейтинг: 4.9/5.0\n"
-
-                "🟢 Онлайн сейчас: 22368\n\n"
-
-                "📈 <b>Наши преимущества:</b>\n"
-
-                "• 🔒 Гарант-сервис на все сделки\n"
-
-                "• ⚡️ Мгновенная доставка товаров\n"
-
-                "• 🛡️ Защита от мошенников\n"
-
-                "• 💎 Проверенные продавцы\n"
-
-                "• 📞 24/7 Поддержка\n"
-
-                "• ⭐️ 99.8% положительных отзывов\n\n"
-
-                "⭐️ Наш канал: @lolzteam\n"
-
-                "📞 Поддержка: @lolzsup\n\n"
-
-                "<i>Статистика обновляется каждые 5 минут</i>"
-
-            )
-
-            keyboard = [
-
-                [InlineKeyboardButton("⬅ Назад", callback_data="menu")]
-
-            ]
-
-            await query.edit_message_text(
-
-                text,
-
-                reply_markup=InlineKeyboardMarkup(keyboard),
-
-                parse_mode="HTML"
-
-            )
 
         if data == 'menu_from_deal':
             await start(update, context)
@@ -1285,4 +1201,5 @@ def main():
         logger.error(f"Ошибка в main: {e}", exc_info=True)
 
 if __name__ == '__main__':
+
     main()
