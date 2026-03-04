@@ -1,6 +1,6 @@
 RU_TEXTS = {
     "start_message": (
-        "<b>Добро пожаловать в Lolz Bot – Сервис гарантированных безопасных сделок</b>\n\n"
+        "<b>Добро пожаловать в Lolz Gifts – Сервис гарантированных безопасных сделок</b>\n\n"
         ""
         "<b>💼 Покупайте и продавайте всё, что угодно – безопасно!</b>\n"
         "От Telegram-подарков и NFT до токенов и фиата – сделки проходят легко и без риска.\n\n"
@@ -443,6 +443,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
