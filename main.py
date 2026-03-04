@@ -304,18 +304,24 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if args and args[0] in deals:
             deal_id = args[0]
             deal = deals[deal_id]
-            seller_id = deal['seller_id']
-            
-            try:
-                seller_chat = await context.bot.get_chat(seller_id)
-                seller_username = seller_chat.username or "Неизвестно"
-            except Exception as e:
-                logger.error(f"Could not get chat for seller_id {seller_id}: {e}")
-                seller_username = "Неизвестно"
-            
-            deals[deal_id]['buyer_id'] = user_id
-            deals[deal_id]['status'] = 'active'
-            save_deal(deal_id)
+
+            seller_id = deal.get('seller_id')
+            buyer_id = deal.get('buyer_id')
+
+            if user_id == seller_id:
+                await context.bot.send_message(
+                    chat_id,
+                    "🚫 Продавец не может открывать ссылку для покупателя.",
+                    parse_mode="HTML"
+                )
+                return
+
+    seller_chat = await context.bot.get_chat(seller_id)
+    seller_username = seller_chat.username or "Неизвестно"
+
+    deals[deal_id]['buyer_id'] = user_id
+    deals[deal_id]['status'] = 'active'
+    save_deal(deal_id)
 
             payment_method = deal.get('payment_method', 'ton')
             payment_instruction = "Инструкция по оплате не определена."
@@ -1230,6 +1236,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
