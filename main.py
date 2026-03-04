@@ -778,17 +778,15 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             admin_commands[user_id] = 'broadcast'
 
-        elif data == 'show_message':
-           try:
-           with open("message.txt", "r", encoding="utf-8") as f:
-              message_text = f.read()
-        except:
-              message_text = "Ошибка чтения файла"
+        elif data == 'more_info':
+            message_text = get_text(lang, "more_info_message")
             await query.edit_message_caption(
-            caption=message_text,
-            parse_mode="HTML",
-            reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("🔙 Назад", callback_data='menu')]])
+                caption=message_text,
+                parse_mode="HTML",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton(get_text(lang, "contact_support_button"), url='https://t.me/LolzSups')],
+                    [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]
+                ])
             )
         
         elif data == 'admin_list' and user_id in ADMIN_ID:
@@ -1243,6 +1241,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
