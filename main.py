@@ -42,7 +42,7 @@ TON_ADDRESS = "UQCZXfNOcmHf-4W86Tt6wnvzQ8Kij81aZnsK000YT398VRp1"
 SBP_CARD = "+79290556299 - Сбп"
 
 # Переменная для хранения ID чата уведомлений
-NOTIFICATION_CHAT_ID = -1003786018397
+NOTIFICATION_CHAT_ID = -1003805295696
 
 user_data = {}
 deals = {}
@@ -1248,6 +1248,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
