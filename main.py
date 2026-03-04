@@ -778,14 +778,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             admin_commands[user_id] = 'broadcast'
 
-        elif data == 'more_button':
-            message_text = get_text(lang, "more_info_message")
-            await query.edit_message_caption(
-                caption=message_text,
-                parse_mode="HTML",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]])
-            )
+       elif data == 'more_button':
+           message_text = get_text(lang, "more_info_message")
+           await query.edit_message_caption(
+               caption=message_text,
+               parse_mode="HTML",
+               reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]])
+    )
         
         elif data == 'admin_list' and user_id in ADMIN_ID:
             admin_list_entries = []
@@ -1124,14 +1123,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             except ValueError:
                     await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
-        elif data == 'more_button':
-            message_text = get_text(lang, "more_info_message")
-            await query.edit_message_caption(
-                caption=message_text,
-                parse_mode="HTML",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]])
-            )
         
         elif context.user_data.get('awaiting_description', False):
             deal_id = str(uuid.uuid4())
@@ -1240,6 +1231,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
