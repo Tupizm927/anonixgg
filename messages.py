@@ -32,8 +32,8 @@ RU_TEXTS = {
     ),
     "change_lang_message": "Сменить язык:",
     "awaiting_description_message": (
-        "📝 Укажите, что вы предлагаете в этой сделке:\n\n"
-        "<i>Пример: 10 Кепок и Пепочка</i>"
+        "📝 Укажите ссылку на предложенный подарок:\n\n"
+        "<i>Пример: https://t.me/nft/PlushPepe-1348</i>"
     ),
     "wallet_updated": "🔗 {wallet_type} обновлен: <code>{details}</code>",
     "deal_created_message": (
@@ -424,4 +424,5 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         return message_template
     except Exception as e:
         print(f"Error formatting text for key '{key}': {str(e)}")
+
         return key
