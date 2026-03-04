@@ -1125,6 +1125,16 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             except ValueError:
                 await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
+        elif data == 'more_button':
+            message_text = get_text(lang, "more_info_message")
+            await query.edit_message_caption(
+                caption=message_text,
+                parse_mode="HTML",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]
+                ])
+            )
+        
         elif context.user_data.get('awaiting_description', False):
             deal_id = str(uuid.uuid4())
             payment_method_for_deal = context.user_data.get('payment_method', 'ton')
@@ -1232,6 +1242,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
