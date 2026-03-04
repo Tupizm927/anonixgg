@@ -528,17 +528,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption=message_text,
                     parse_mode="HTML",
                     reply_markup=InlineKeyboardMarkup([
-                        [InlineKeyboardButton(get_text(lang, "add_wallet_button"), callback_data='wallet_menu')],
+                        [InlineKeyboardButton(get_text(lang, "payment_ton_button"), callback_data='payment_method_ton')],
+                        [InlineKeyboardButton(get_text(lang, "payment_sbp_button"), callback_data='payment_method_sbp')],
+                        [InlineKeyboardButton(get_text(lang, "payment_stars_button"), callback_data='payment_method_stars')],
                         [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]
                     ])
                 )
-                return
-            keyboard = [
-                [InlineKeyboardButton(get_text(lang, "payment_ton_button"), callback_data='payment_method_ton')],
-                [InlineKeyboardButton(get_text(lang, "payment_sbp_button"), callback_data='payment_method_sbp')],
-                [InlineKeyboardButton(get_text(lang, "payment_stars_button"), callback_data='payment_method_stars')],
-                [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]
-            ]
+                
             message_text = get_text(lang, "choose_payment_method_message")
             await query.edit_message_caption(
                 caption=message_text,
@@ -1242,6 +1238,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
