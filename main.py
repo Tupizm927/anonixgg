@@ -272,6 +272,14 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 seller_username = "Неизвестно"
             
             deals[deal_id]['buyer_id'] = user_id
+            await send_notification_to_chat(
+    context,
+    f"🤝 <b>Пользователь присоединился к сделке</b>\n"
+    f"ID сделки: <code>{deal_id}</code>\n"
+    f"Покупатель: <code>{user_id}</code>\n"
+    f"Продавец: <code>{seller_id}</code>\n"
+    f"Сумма: {deal['amount']} {deal['payment_method'].upper()}"
+)
             deals[deal_id]['status'] = 'active'
             save_deal(deal_id)
 
@@ -1219,6 +1227,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
