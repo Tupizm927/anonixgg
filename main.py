@@ -1059,7 +1059,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
-            async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         user_id = update.effective_user.id
         lang = "ru"  # или бери язык пользователя как у тебя в проекте
@@ -1209,6 +1209,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
