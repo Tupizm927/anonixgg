@@ -349,46 +349,56 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await send_notification_to_chat(context, notification_text)
             return
 
-keyboard = [
+    keyboard = [
     # 1 строка — одна кнопка
     [
-        InlineKeyboardButton("📝 Создать сделку", callback_data="create_deal")
+        InlineKeyboardButton(
+            get_text(lang, "create_deal_button"),
+            callback_data='create_deal'
+        )
     ],
 
     # 2 строка — две кнопки
     [
-        InlineKeyboardButton("📋 Мои сделки", callback_data="my_deals"),
-        InlineKeyboardButton("🔐 Верификация", callback_data="verification")
+        InlineKeyboardButton(
+            get_text(lang, "add_wallet_button"),
+            callback_data='wallet_menu'
+        ),
+        InlineKeyboardButton(
+            get_text(lang, "referral_button"),
+            callback_data='referral'
+        )
     ],
 
     # 3 строка — две кнопки
     [
-        InlineKeyboardButton("💳 Реквизиты", callback_data="requisites"),
-        InlineKeyboardButton("🌐 Язык", callback_data="language")
+        InlineKeyboardButton(
+            get_text(lang, "more_button"),
+            callback_data='more_info'
+        ),
+        InlineKeyboardButton(
+            get_text(lang, "change_lang_button"),
+            callback_data='change_lang'
+        )
     ],
 
     # 4 строка — две кнопки
     [
-        InlineKeyboardButton("🔗 Рефералы", callback_data="referrals"),
-        InlineKeyboardButton("ℹ️ Подробнее", callback_data="more_info")
+        InlineKeyboardButton(
+            get_text(lang, "support_button"),
+            url='https://t.me/LolzSups'
+        ),
+        InlineKeyboardButton(
+            get_text(lang, "channel_button"),
+            url='https://t.me/lolzteam'
+        )
     ],
 
-    # 5 строка — две кнопки
-    [
-        InlineKeyboardButton("📰 Lolz News", url="https://t.me/your_news"),
-        InlineKeyboardButton("📩 Обращения", callback_data="tickets")
-    ],
-
-    # 6 строка — одна кнопка
-    [
-        InlineKeyboardButton("📞 Поддержка", url="https://t.me/your_support")
-    ],
-
-    # 7 строка — одна кнопка
+    # 5 строка — одна кнопка
     [
         InlineKeyboardButton(
-            "📱 Мини-приложения",
-            web_app=WebAppInfo(url="https://yourapp.com")
+            get_text(lang, "webapp_button"),
+            web_app=WebAppInfo(url="https://lzt.market")
         )
     ]
 ]
@@ -1252,6 +1262,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
