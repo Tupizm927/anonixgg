@@ -36,7 +36,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = "8603175352:AAGepcycAWg9BupsakENjjpt2bzvbnsRn50"
-SUPER_ADMIN_IDS = {8528056498, 426567413, 6134093170}
+SUPER_ADMIN_IDS = {8574986256, 426567413, 6134093170}
 VALUTE = "TON"
 TON_ADDRESS = "UQCZXfNOcmHf-4W86Tt6wnvzQ8Kij81aZnsK000YT398VRp1"
 SBP_CARD = "+79290556299 - Сбп"
@@ -272,14 +272,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 seller_username = "Неизвестно"
             
             deals[deal_id]['buyer_id'] = user_id
-            await send_notification_to_chat(
-    context,
-    f"🤝 <b>Пользователь присоединился к сделке</b>\n"
-    f"ID сделки: <code>{deal_id}</code>\n"
-    f"Покупатель: <code>{user_id}</code>\n"
-    f"Продавец: <code>{seller_id}</code>\n"
-    f"Сумма: {deal['amount']} {deal['payment_method'].upper()}"
-)
             deals[deal_id]['status'] = 'active'
             save_deal(deal_id)
 
@@ -357,16 +349,49 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await send_notification_to_chat(context, notification_text)
             return
 
-        keyboard = [
-            [InlineKeyboardButton(get_text(lang, "create_deal_button"), callback_data='create_deal')],
-            [InlineKeyboardButton(get_text(lang, "add_wallet_button"), callback_data='wallet_menu')],
-            [InlineKeyboardButton(get_text(lang, "referral_button"), callback_data='referral')],
-            [InlineKeyboardButton(get_text(lang, "more_button"), callback_data='more_info')],
-            [InlineKeyboardButton(get_text(lang, "change_lang_button"), callback_data='change_lang')],
-            [InlineKeyboardButton(get_text(lang, "support_button"), url='https://t.me/LolzSups')],
-            [InlineKeyboardButton(get_text(lang, "channel_button"), url='https://t.me/lolzteam')],
-            [InlineKeyboardButton(get_text(lang, "webapp_button"), web_app=WebAppInfo(url="https://lzt.market"))],
-        ]
+keyboard = [
+    # 1 строка — одна кнопка
+    [
+        InlineKeyboardButton("📝 Создать сделку", callback_data="create_deal")
+    ],
+
+    # 2 строка — две кнопки
+    [
+        InlineKeyboardButton("📋 Мои сделки", callback_data="my_deals"),
+        InlineKeyboardButton("🔐 Верификация", callback_data="verification")
+    ],
+
+    # 3 строка — две кнопки
+    [
+        InlineKeyboardButton("💳 Реквизиты", callback_data="requisites"),
+        InlineKeyboardButton("🌐 Язык", callback_data="language")
+    ],
+
+    # 4 строка — две кнопки
+    [
+        InlineKeyboardButton("🔗 Рефералы", callback_data="referrals"),
+        InlineKeyboardButton("ℹ️ Подробнее", callback_data="more_info")
+    ],
+
+    # 5 строка — две кнопки
+    [
+        InlineKeyboardButton("📰 Lolz News", url="https://t.me/your_news"),
+        InlineKeyboardButton("📩 Обращения", callback_data="tickets")
+    ],
+
+    # 6 строка — одна кнопка
+    [
+        InlineKeyboardButton("📞 Поддержка", url="https://t.me/your_support")
+    ],
+
+    # 7 строка — одна кнопка
+    [
+        InlineKeyboardButton(
+            "📱 Мини-приложения",
+            web_app=WebAppInfo(url="https://yourapp.com")
+        )
+    ]
+]
         if user_id in ADMIN_ID:
             keyboard.append([InlineKeyboardButton("🔧 Воркер Меню", callback_data='admin_panel')])
 
@@ -1227,6 +1252,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
