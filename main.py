@@ -533,13 +533,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         [InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]
                     ])
                 )
-                
-            message_text = get_text(lang, "choose_payment_method_message")
-            await query.edit_message_caption(
-                caption=message_text,
-                parse_mode="HTML",
-                reply_markup=InlineKeyboardMarkup(keyboard)
-            )
 
         elif data.startswith('payment_method_'):
             payment_method = data.split('_')[-1]
@@ -1237,6 +1230,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
