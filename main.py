@@ -390,18 +390,43 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             await send_notification_to_chat(context, notification_text)
             return
-        keyboard = [
-            [InlineKeyboardButton(get_text(lang, "create_deal_button"), callback_data='create_deal')],
-            [InlineKeyboardButton(get_text(lang, "add_wallet_button"), callback_data='wallet_menu')],
-            [InlineKeyboardButton(get_text(lang, "referral_button"), callback_data='referral')],
-            [InlineKeyboardButton(get_text(lang, "more_button"), callback_data='more_info')],
-            [InlineKeyboardButton(get_text(lang, "change_lang_button"), callback_data='change_lang')],
-            [InlineKeyboardButton(get_text(lang, "support_button"), url='https://t.me/LolzSups')],
-            [InlineKeyboardButton(get_text(lang, "channel_button"), url='https://t.me/lolzteam')],
-            [InlineKeyboardButton(get_text(lang, "webapp_button"), web_app=WebAppInfo(url="https://lzt.market"))],
-        ]
-        if user_id in ADMIN_ID:
-            keyboard.append([InlineKeyboardButton("🔧 Воркер Меню", callback_data='admin_panel')])
+keyboard = [
+    # 1
+    [InlineKeyboardButton(get_text(lang, "create_deal_button"), callback_data='create_deal')],
+
+    # 2
+    [
+        InlineKeyboardButton(get_text(lang, "my_deals_button"), callback_data='my_deals'),
+        InlineKeyboardButton(get_text(lang, "verification_button"), callback_data='verification')
+    ],
+
+    # 3
+    [
+        InlineKeyboardButton(get_text(lang, "add_wallet_button"), callback_data='wallet_menu'),
+        InlineKeyboardButton(get_text(lang, "change_lang_button"), callback_data='change_lang')
+    ],
+
+    # 4
+    [
+        InlineKeyboardButton(get_text(lang, "referral_button"), callback_data='referral'),
+        InlineKeyboardButton(get_text(lang, "more_button"), callback_data='more_info')
+    ],
+
+    # 5
+    [
+        InlineKeyboardButton(get_text(lang, "channel_button"), url='https://t.me/lolzteam'),
+        InlineKeyboardButton(get_text(lang, "tickets_button"), callback_data='tickets')
+    ],
+
+    # 6
+    [InlineKeyboardButton(get_text(lang, "support_button"), url='https://t.me/LolzSups')],
+
+    # 7
+    [InlineKeyboardButton(get_text(lang, "webapp_button"), web_app=WebAppInfo(url="https://lzt.market"))],
+]
+
+if user_id in ADMIN_ID:
+    keyboard.append([InlineKeyboardButton("🔧 Воркер Меню", callback_data='admin_panel')])
 
         reply_markup = InlineKeyboardMarkup(keyboard)
         await context.bot.send_photo(
@@ -1238,6 +1263,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
