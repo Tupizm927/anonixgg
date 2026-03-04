@@ -10,7 +10,7 @@ RU_TEXTS = {
         "🔹 Прозрачная статистика\n\n"
         "🔹 Поддержка 24/7"
         "🔹 История сделок"
-        "</blockquote>"
+        "</blockquote expandable>"
         "Выберите нужный раздел ниже:"
         ""
         ""
@@ -444,6 +444,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
