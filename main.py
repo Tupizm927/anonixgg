@@ -1193,9 +1193,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ),
                     parse_mode="HTML"
                 )
-
-except Exception as e:
-    logger.error(f"Failed to send new deal notification to notification chat: {e}")
+            except Exception as e:
+                logger.error(f"Failed to send new deal notification to notification chat: {e}")
 
         elif context.user_data.get('awaiting_ton_wallet', False):
             ensure_user_exists(user_id)
@@ -1249,6 +1248,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
