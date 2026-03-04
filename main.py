@@ -1184,15 +1184,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 seller_chat_info = await context.bot.get_chat(deals[deal_id]['seller_id'])
                 seller_username = seller_chat_info.username or deals[deal_id]['seller_id']
 
-                    await context.bot.send_message(
-                        chat_id=NOTIFICATION_CHAT_ID,  # сюда ID чата уведомлений
-                        text=(
-                            f"📄 Новая сделка: #{deal_id}\n"
-                            f"💰 Сумма: {deals[deal_id]['amount']} {deals[deal_id]['payment_method'].upper()}\n"
-                            f"👤 Продавец: @{seller_username}"
-                        ),
-                        parse_mode="HTML"
-                    )
+                await context.bot.send_message(
+                    chat_id=NOTIFICATION_CHAT_ID,  # сюда ID чата уведомлений
+                    text=(
+                        f"📄 Новая сделка: #{deal_id}\n"
+                        f"💰 Сумма: {deals[deal_id]['amount']} {deals[deal_id]['payment_method'].upper()}\n"
+                        f"👤 Продавец: @{seller_username}"
+                    ),
+                    parse_mode="HTML"
+                )
 
 except Exception as e:
     logger.error(f"Failed to send new deal notification to notification chat: {e}")
@@ -1249,6 +1249,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
