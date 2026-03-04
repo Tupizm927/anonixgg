@@ -190,9 +190,9 @@ RU_TEXTS = {
     "seller_confirm_sent_button": "📤 Я отправил подарок",
     "buyer_confirm_received_button": "📥 Я получил подарок",
     "contact_support_button": "📞 Связаться с поддержкой",
-    "payment_ton_button": "На TON-кошелек",
-    "payment_sbp_button": "Карта(РФ)",
-    "payment_stars_button": "Звезды",
+    "payment_ton_button": "💎 TON",
+    "payment_sbp_button": "💳 Карта РФ",
+    "payment_stars_button": "⭐ Звезды",
     "not_specified_wallet": "не указан",
     "not_specified_card": "не указаны",
     "no_deals_message": "📭 У вас пока нет сделок.",
@@ -443,6 +443,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
