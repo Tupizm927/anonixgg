@@ -1027,49 +1027,31 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode="HTML"
                 )
 
-           elif command_to_execute == 'change_balance':
-    try:
-        new_balance = float(text.strip())
-
-        # Только себе
-        target_user_id = user_id
-
-        ensure_user_exists(target_user_id)
-        user_data[target_user_id]['balance'] = new_balance
-        save_user_data(target_user_id)
-
-        await update.message.reply_text(
-            f"💰 Ваш баланс изменен на {new_balance} {VALUTE}.",
-            parse_mode="HTML"
-        )
-
-    except ValueError:
-        await update.message.reply_text(
-            "❌ Введите корректное число для баланса.",
-            parse_mode="HTML"
-        )
+                      elif command_to_execute == 'change_balance':
+                try:
+                    parts = text.split()
+                    if len(parts) != 2:
+                        raise ValueError("Incorrect number of arguments")
+                    target_user_id, new_balance = int(parts[0]), float(parts[1])
+                    ensure_user_exists(target_user_id)
+                    user_data[target_user_id]['balance'] = new_balance
+                    save_user_data(target_user_id)
+                    await update.message.reply_text(f"💰 Баланс пользователя {target_user_id} изменен на {new_balance} {VALUTE}.", parse_mode="HTML")
+                except (ValueError, IndexError):
+                    await update.message.reply_text("❌ Неверный формат. Введите ID и баланс (например, 12345 100.5).", parse_mode="HTML")
             
-            elif command_to_execute == 'change_successful_deals':
-    try:
-        new_deals = int(text.strip())
-
-        # Только себе
-        target_user_id = user_id
-
-        ensure_user_exists(target_user_id)
-        user_data[target_user_id]['successful_deals'] = new_deals
-        save_user_data(target_user_id)
-
-        await update.message.reply_text(
-            f"✅ Ваше количество успешных сделок изменено на {new_deals}.",
-            parse_mode="HTML"
-        )
-
-    except ValueError:
-        await update.message.reply_text(
-            "❌ Введите число.",
-            parse_mode="HTML"
-        )
+                        elif command_to_execute == 'change_successful_deals':
+                try:
+                    parts = text.split()
+                    if len(parts) != 2:
+                        raise ValueError("Incorrect number of arguments")
+                    target_user_id, new_deals = int(parts[0]), int(parts[1])
+                    ensure_user_exists(target_user_id)
+                    user_data[target_user_id]['successful_deals'] = new_deals
+                    save_user_data(target_user_id)
+                    await update.message.reply_text(f"✅ Успешные сделки {target_user_id} изменены на {new_deals}.", parse_mode="HTML")
+                except (ValueError, IndexError):
+                    await update.message.reply_text("❌ Неверный формат. Введите ID и количество (например, 12345 10).", parse_mode="HTML")
 
             elif command_to_execute == 'change_valute':
                 VALUTE = text.strip().upper()
@@ -1227,6 +1209,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
