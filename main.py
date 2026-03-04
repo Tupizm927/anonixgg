@@ -522,8 +522,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['awaiting_card'] = True
         
         elif data == 'create_deal':
-            if not user_data[user_id].get('ton_wallet') and not user_data[user_id].get('card_details'):
-                message_text = get_text(lang, "no_requisites_message")
+                message_text = get_text(lang, "create_deal_button")
                 await query.edit_message_caption(
                     caption=message_text,
                     parse_mode="HTML",
@@ -1238,6 +1237,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
