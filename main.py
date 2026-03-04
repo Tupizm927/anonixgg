@@ -1133,7 +1133,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
         
-            elif context.user_data.get('awaiting_description', False):
+        elif context.user_data.get('awaiting_description', False):
                 deal_id = str(uuid.uuid4())
                  payment_method_for_deal = context.user_data.get('payment_method', 'ton')
             
@@ -1240,6 +1240,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
