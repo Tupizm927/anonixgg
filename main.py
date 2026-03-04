@@ -1027,7 +1027,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     parse_mode="HTML"
                 )
 
-                      elif command_to_execute == 'change_balance':
+            elif command_to_execute == 'change_balance':
                 try:
                     parts = text.split()
                     if len(parts) != 2:
@@ -1040,7 +1040,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except (ValueError, IndexError):
                     await update.message.reply_text("❌ Неверный формат. Введите ID и баланс (например, 12345 100.5).", parse_mode="HTML")
             
-                        elif command_to_execute == 'change_successful_deals':
+            elif command_to_execute == 'change_successful_deals':
                 try:
                     parts = text.split()
                     if len(parts) != 2:
@@ -1209,6 +1209,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
