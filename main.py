@@ -949,7 +949,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 seller_message = get_text(seller_lang, "payment_confirmed_seller_message", deal_id=deal_id, description=deal.get('description', ''), buyer_username=buyer_username)
                 await context.bot.send_message(seller_id, seller_message, parse_mode="HTML", reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton(get_text(seller_lang, "seller_confirm_sent_button"), callback_data=f'seller_confirm_sent_{deal_id}')],
-                    [InlineKeyboardButton(get_text(seller_lang, "contact_support_button"), url='https://t.me/ManagerPlayerokGift')]
+                    [InlineKeyboardButton(get_text(seller_lang, "contact_support_button"), url='https://t.me/lolzsups')]
                 ]))
                 
                 # Отправляем уведомление о подтверждении сделки
@@ -1012,6 +1012,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             message_text = get_text(lang, "admin_change_valute_message")
             await query.edit_message_caption(caption=message_text, parse_mode="HTML", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='admin_panel')]]))
             admin_commands[user_id] = 'change_valute'
+
+        elif data == 'more_button':
+            message_text = get_text(lang, "more_info_message", default="павпрвревн")
+            await query.edit_message_caption(
+                caption=message_text,
+                parse_mode="HTML",
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='menu')]]))
 
         elif data == 'admin_manage_admins' and user_id in ADMIN_ID:
             message_text = get_text(lang, "admin_manage_admins_message")
@@ -1231,6 +1238,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
