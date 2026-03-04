@@ -1,10 +1,25 @@
-import sqlite3
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes
-from telegram.error import NetworkError, BadRequest
+import os
 import uuid
 import logging
-import os
+import sqlite3
+
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup
+)
+
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    MessageHandler,
+    CallbackQueryHandler,
+    ContextTypes,
+    filters
+)
+
+from telegram.error import NetworkError, BadRequest
+
 from messages import get_text
 
 logging.basicConfig(
@@ -1203,6 +1218,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
