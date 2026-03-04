@@ -6,7 +6,8 @@ import sqlite3
 from telegram import (
     Update,
     InlineKeyboardButton,
-    InlineKeyboardMarkup
+    InlineKeyboardMarkup,
+    WebAppInfo
 )
 
 from telegram.ext import (
@@ -1218,6 +1219,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
