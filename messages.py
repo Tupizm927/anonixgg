@@ -67,7 +67,7 @@ RU_TEXTS = {
         "После оплаты ожидайте подтверждения администратором."
     ),
     "more_info": (
-    "📊 <b>Статистика Lolz Market</b>\n\n"
+    "📊 <b>Статистика Lolz Gifts</b>\n\n"
     "🤝 <b>Всего сделок:</b> 110651\n"
     "✅ <b>Успешных сделок:</b> 107276\n"
     "💰 <b>Общий объем:</b> $1141749\n"
@@ -444,4 +444,5 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
