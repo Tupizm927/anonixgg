@@ -778,7 +778,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             admin_commands[user_id] = 'broadcast'
 
-        elif data == 'more_info':
+        elif data == 'more_button':
             message_text = get_text(lang, "more_info")
             await query.edit_message_caption(
                 caption=message_text,
@@ -1232,6 +1232,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
