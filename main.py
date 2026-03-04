@@ -1120,7 +1120,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data['awaiting_description'] = True
                     message_text = get_text(lang, "awaiting_description_message")
                     await update.message.reply_text(message_text, parse_mode="HTML")
-            except ValueError:
+                except ValueError:
                     await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
         
@@ -1231,6 +1231,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
