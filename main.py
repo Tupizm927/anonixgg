@@ -1118,23 +1118,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update.message.reply_text(f"💱 Валюта изменена на {VALUTE}.", parse_mode="HTML")
 
 
-
-            elif context.user_data.get('awaiting_amount', False):
-                try:
-                    amount_float = float(text)
-                    
-                    if amount_float <= 0:
-                        await update.message.reply_text("❌ Сумма должна быть положительным числом.", parse_mode="HTML")
-                        return
-                    context.user_data['amount'] = amount_float
-                    context.user_data['awaiting_amount'] = False
-                    context.user_data['awaiting_description'] = True
-                    
-                    message_text = get_text(lang, "awaiting_description_message")
-                    await update.message.reply_text(message_text, parse_mode="HTML")
-                    
-                except ValueError:
-                    await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
+        elif context.user_data.get('awaiting_amount', False):
+            try:
+                amount_float = float(text)
+                if amount_float <= 0:
+                    await update.message.reply_text("❌ Сумма должна быть положительным числом.", parse_mode="HTML")
+                    return
+                context.user_data['amount'] = amount_float
+                context.user_data['awaiting_amount'] = False
+                context.user_data['awaiting_description'] = True
+                message_text = get_text(lang, "awaiting_description_message")
+                await update.message.reply_text(message_text, parse_mode="HTML")
+            except ValueError:
+                await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
         
             elif context.user_data.get('awaiting_description', False):
@@ -1244,6 +1240,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
