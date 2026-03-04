@@ -83,7 +83,7 @@ RU_TEXTS = {
     "⭐️ <b>Наш канал:</b> @lolzteam\n"
     "📞 <b>Поддержка:</b> @lolzsups\n\n"
     "Статистика обновляется каждые 5 минут"
-),
+    ),
     "deal_info_stars_message": (
         "💳 Информация о сделке <b>#{deal_id}</b>\n\n"
         "👤 Вы покупатель в сделке.\n"
@@ -444,6 +444,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
