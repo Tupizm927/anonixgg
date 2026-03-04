@@ -316,12 +316,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 return
 
-    seller_chat = await context.bot.get_chat(seller_id)
-    seller_username = seller_chat.username or "Неизвестно"
+            seller_chat = await context.bot.get_chat(seller_id)
+            seller_username = seller_chat.username or "Неизвестно"
 
-    deals[deal_id]['buyer_id'] = user_id
-    deals[deal_id]['status'] = 'active'
-    save_deal(deal_id)
+            deals[deal_id]['buyer_id'] = user_id
+            deals[deal_id]['status'] = 'active'
+            save_deal(deal_id)
 
             payment_method = deal.get('payment_method', 'ton')
             payment_instruction = "Инструкция по оплате не определена."
@@ -1236,6 +1236,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
