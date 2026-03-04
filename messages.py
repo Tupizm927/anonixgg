@@ -4,13 +4,13 @@ RU_TEXTS = {
         "\n"
         "<b>💼 Покупайте и продавайте всё, что угодно – безопасно!</b>\n"
         "От Telegram-подарков и NFT до токенов и фиата – сделки проходят легко и без риска.\n\n"
-        "<blockquote expandable>"
+        "<blockquote>"
         "🔹 Защита от мошенников\n"
         "🔹 Автоматическое удержание средств\n"
         "🔹 Прозрачная статистика\n\n"
         "🔹 Поддержка 24/7\n"
         "🔹 История сделок\n"
-        "</blockquote expandable>"
+        "</blockquote>\n"
         "Выберите нужный раздел ниже:"
         ""
     ),
@@ -443,6 +443,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
