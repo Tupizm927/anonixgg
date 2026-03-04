@@ -33,6 +33,10 @@ RU_TEXTS = {
     "awaiting_description_message": (
         "📝 Укажите ссылку на предложенный подарок:\n\n"
         "<i>Пример: https://t.me/nft/PlushPepe-1348</i>"
+        "<i>Если у вас несколько подарков, указывайте каждую ссылку с новой строки, Пример:</i>"
+        "<i>t.me/nft/DurovsCap-1</i>"
+        "<i>t.me/nft/PlushPepe-2</i>"
+        "<i>t.me/nft/EternalRose-3</i>"
     ),
     "wallet_updated": "🔗 {wallet_type} обновлен: <code>{details}</code>",
     "deal_created_message": (
@@ -443,6 +447,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
