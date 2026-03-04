@@ -1134,19 +1134,19 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await update.message.reply_text("❌ Неверный формат. Введите число для суммы.", parse_mode="HTML")
 
         
-        elif context.user_data.get('awaiting_description', False):
-            deal_id = str(uuid.uuid4())
-            payment_method_for_deal = context.user_data.get('payment_method', 'ton')
+             elif context.user_data.get('awaiting_description', False):
+                 deal_id = str(uuid.uuid4())
+                 payment_method_for_deal = context.user_data.get('payment_method', 'ton')
             
-            deals[deal_id] = {
+                 deals[deal_id] = {
                 'amount': context.user_data['amount'],
                 'description': text,
                 'seller_id': user_id,
                 'buyer_id': None,
                 'status': 'active',
                 'payment_method': payment_method_for_deal
-            }
-            save_deal(deal_id)
+                }
+                save_deal(deal_id)
             
             context.user_data.pop('amount', None)
             context.user_data.pop('awaiting_description', None)
@@ -1241,6 +1241,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
