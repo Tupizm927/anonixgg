@@ -1,5 +1,5 @@
 ﻿import sqlite3
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes
 from telegram.error import NetworkError, BadRequest
 import uuid
@@ -1203,4 +1203,5 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
