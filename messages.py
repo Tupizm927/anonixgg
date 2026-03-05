@@ -1,19 +1,24 @@
 RU_TEXTS = {
     "start_message": (
         "<b>Добро пожаловать в Lolz Gifts – Сервис гарантированных безопасных сделок</b>\n\n"
-        ""
+
         "<b>💼 Покупайте и продавайте всё, что угодно – безопасно!</b>\n"
         "От Telegram-подарков и NFT до токенов и фиата – сделки проходят легко и без риска.\n\n"
+
         "<blockquote>"
         "🔹 Защита от мошенников\n"
         "🔹 Автоматическое удержание средств\n"
         "🔹 Прозрачная статистика\n"
         "🔹 Поддержка 24/7\n"
         "🔹 История сделок\n"
-        "</blockquote>\n"
+        "</blockquote>\n\n"
+
+        "👤 <b>Ваш ID:</b> {user_id}\n"
+        "📊 <b>Ваши сделки:</b> {deals_count}\n\n"
+
         "Выберите нужный раздел ниже:"
-        ""
     ),
+}
     "wallet_menu_message": "Выберите способ оплаты:",
     "add_ton_wallet_message": (
         "💼 Ваш текущий TON-кошелек: <code>{current_wallet}</code>\n\n"
@@ -447,6 +452,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
