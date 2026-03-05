@@ -12,10 +12,6 @@ RU_TEXTS = {
         "🔹 Поддержка 24/7\n"
         "🔹 История сделок\n"
         "</blockquote>\n\n"
-
-        "👤 <b>Ваш ID:</b> {user_id}\n"
-        "📊 <b>Ваши сделки:</b> {deals_count}\n\n"
-
         "Выберите нужный раздел ниже:"
     ),
     "wallet_menu_message": "Выберите способ оплаты:",
@@ -451,6 +447,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
