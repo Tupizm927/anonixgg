@@ -18,7 +18,6 @@ RU_TEXTS = {
 
         "Выберите нужный раздел ниже:"
     ),
-}
     "wallet_menu_message": "Выберите способ оплаты:",
     "add_ton_wallet_message": (
         "💼 Ваш текущий TON-кошелек: <code>{current_wallet}</code>\n\n"
@@ -452,6 +451,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
