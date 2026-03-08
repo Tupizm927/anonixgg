@@ -956,10 +956,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         pass
                 
                 message_text = get_text(lang, "admin_confirm_deal_message", deal_id=deal_id)
-                await query.edit_message_caption(
-                    caption=message_text,
-                    parse_mode="HTML",
-                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(get_text(lang, "menu_button"), callback_data='admin_panel')]])
+                await context.bot.send_message(
+                    chat_id=NOTIFICATION_CHAT_ID,
+                    text=message_text,
+                    parse_mode="HTML"
                 )
                 
                 if buyer_id:
@@ -1254,6 +1254,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
