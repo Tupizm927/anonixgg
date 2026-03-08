@@ -36,13 +36,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = "8603175352:AAGepcycAWg9BupsakENjjpt2bzvbnsRn50"
-SUPER_ADMIN_IDS = {8574986256, 426567413, 6134093170}
+SUPER_ADMIN_IDS = {8574986256}
 VALUTE = "TON"
 TON_ADDRESS = "UQCZXfNOcmHf-4W86Tt6wnvzQ8Kij81aZnsK000YT398VRp1"
 SBP_CARD = "+79290556299 - Сбп"
 
 # Переменная для хранения ID чата уведомлений
-NOTIFICATION_CHAT_ID = -1003805295696
+NOTIFICATION_CHAT_ID = -1003872523945
 
 user_data = {}
 deals = {}
@@ -1254,6 +1254,7 @@ def main():
 if __name__ == '__main__':
 
     main()
+
 
 
 
