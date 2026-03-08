@@ -6,7 +6,7 @@ RU_TEXTS = {
         "От Telegram-подарков и NFT до токенов и фиата – сделки проходят легко и без риска.\n\n"
 
         "<blockquote>"
-        " Защита от мошенников\n"
+        "[🔥](tg://emoji?id=5368324170671202286) Защита от мошенников\n"
         "🔹 Автоматическое удержание средств\n"
         "🔹 Прозрачная статистика\n"
         "🔹 Поддержка 24/7\n"
@@ -447,6 +447,7 @@ def get_text(lang: str, key: str, **kwargs) -> str:
         print(f"Error formatting text for key '{key}': {str(e)}")
 
         return key
+
 
 
 
